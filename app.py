@@ -35,9 +35,5 @@ def handle_message(event):
     reply_message = f"你說了: {user_message}"
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_message))
 
-# 讓 Vercel 正確啟動 Flask
-def line_handler(event, context):
-    return app(event, context)
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
