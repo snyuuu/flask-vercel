@@ -15,7 +15,7 @@ line_handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
 @app.route("/", methods=["GET"])
 def home():
-    return "LINE Bot is running on Vercel."
+    return "LINE首頁 像紹俊愛妳喔...... 無....居咪"
 
 @app.route("/callback", methods=["POST"])
 def callback():
