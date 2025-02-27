@@ -4,6 +4,9 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 import os
 from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
 app = Flask(__name__)
 
 # 從環境變數取得 LINE Bot Token 和 Secret
