@@ -3,7 +3,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 import os
-
+from openai import OpenAI
 app = Flask(__name__)
 
 # 從環境變數取得 LINE Bot Token 和 Secret
@@ -32,7 +32,21 @@ def callback():
 @line_handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     user_message = event.message.text
-    reply_message = f"義義: {user_message}"
+
+    client = OpenAI(api_key=os.getenv('OPENAI_KEY'))
+
+    completion = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {
+                "role": "user",
+                "content": "Write a haiku about recursion in programming."
+            }
+        ]
+    )
+
+    reply_message = completion.choices[0].message.content
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_message))
 
 if __name__ == "__main__":
