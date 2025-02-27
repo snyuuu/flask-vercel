@@ -32,7 +32,7 @@ def callback():
 @line_handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     user_message = event.message.text
-    reply_message = f"你這智障不要再說: {user_message}"
+    reply_message = f"義義: {user_message}"
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_message))
 
 if __name__ == "__main__":
